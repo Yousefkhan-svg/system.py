@@ -418,46 +418,8 @@ if not df.empty:
 # ---------------------------------------------------------
 st.markdown("### ⚡ Quick Entry Command Center")
 
-# OPTION 1: Fast One-Tap Presets
-st.markdown("##### 1. One-Tap Quick Presets")
-p_col1, p_col2, p_col3, p_col4 = st.columns(4)
-
-with p_col1:
-    if st.button("☕ Chai / Tea (200 PKR)", use_container_width=True):
-        new_entry = pd.DataFrame([[datetime.now().date(), "Expense", "Food & Groceries", 200.0, "Tea / Chai", currency]], columns=df.columns)
-        df = pd.concat([df, new_entry], ignore_index=True)
-        save_data(df)
-        st.success("Logged: 200 PKR Chai")
-        st.rerun()
-
-with p_col2:
-    if st.button("⛽ Petrol / Fuel (2000 PKR)", use_container_width=True):
-        new_entry = pd.DataFrame([[datetime.now().date(), "Expense", "Transport & Fuel", 2000.0, "Vehicle Fuel", currency]], columns=df.columns)
-        df = pd.concat([df, new_entry], ignore_index=True)
-        save_data(df)
-        st.success("Logged: 2000 PKR Petrol")
-        st.rerun()
-
-with p_col3:
-    if st.button("🍔 Lunch / Dinner (1000 PKR)", use_container_width=True):
-        new_entry = pd.DataFrame([[datetime.now().date(), "Expense", "Food & Groceries", 1000.0, "Meal / Dining", currency]], columns=df.columns)
-        df = pd.concat([df, new_entry], ignore_index=True)
-        save_data(df)
-        st.success("Logged: 1000 PKR Meal")
-        st.rerun()
-
-with p_col4:
-    if st.button("🛒 Groceries (5000 PKR)", use_container_width=True):
-        new_entry = pd.DataFrame([[datetime.now().date(), "Expense", "Food & Groceries", 5000.0, "Weekly Supplies", currency]], columns=df.columns)
-        df = pd.concat([df, new_entry], ignore_index=True)
-        save_data(df)
-        st.success("Logged: 5000 PKR Groceries")
-        st.rerun()
-
-st.divider()
-
 # Direct Text and Auto-Stop Mic
-st.markdown("##### 2. Direct Text or Auto-Stop Live Mic")
+st.markdown("##### Direct Text or Auto-Stop Live Mic")
 input_col1, input_col2 = st.columns([1, 2])
 
 with input_col1:
@@ -483,8 +445,8 @@ if st.button("⚡ Execute Transaction Entry", use_container_width=True):
 
 st.divider()
 
-# OPTION 2: File Upload Section
-st.markdown("##### 3. Drop Pre-Recorded Voice Note (.m4a, .mp3, .wav)")
+# File Upload Section
+st.markdown("##### Drop Pre-Recorded Voice Note (.m4a, .mp3, .wav)")
 uploaded_audio = st.file_uploader("📂 Select or drag a recorded audio file from phone/PC", type=["m4a", "mp3", "wav", "ogg", "webm"])
 
 if uploaded_audio is not None:
@@ -509,7 +471,7 @@ tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
     "📊 Executive Dashboard", 
     "🤖 AI Financial Advisor", 
     "🔄 Recurring Presets", 
-    "💬 WhatsApp Integration",
+    "💬 Telegram Integration",
     "📄 PDF Statements", 
     "⚙️ Ledger Console"
 ])
@@ -628,17 +590,16 @@ with tab3:
             st.success("All recurring entries appended to ledger.")
             st.rerun()
 
-# TAB 4: Free WhatsApp Integration Guide
+# TAB 4: Free Telegram Integration Guide
 with tab4:
-    st.subheader("💬 Free WhatsApp Auto-Sync Engine")
-    st.write("Log expenses on the go by sending plain text or voice messages directly to your WhatsApp account.")
+    st.subheader("💬 Free Telegram Auto-Sync Engine")
+    st.write("Log expenses seamlessly by messaging your dedicated Telegram Bot directly.")
     
     st.markdown("""
     **Quick Execution Workflow:**
-    1. **Start Evolution API Docker container** in PowerShell/Terminal:
-       `docker run -d --name evolution-api -p 8080:8080 -e AUTHENTICATION_API_KEY=my_secret_key atIndigo/evolution-api:latest`
-    2. **Run Webhook Script**: Start `python whatsapp_bot.py` in a separate terminal window.
-    3. **Send Voice Note or Text**: Message your WhatsApp account (e.g. *"Aaj 1500 petrol ka diya"*), and it will automatically save into `expenses.csv`.
+    1. **Create a Bot**: Message `@BotFather` on Telegram, use `/newbot`, and get your API Token.
+    2. **Run Bot Script**: Start your background polling script by running `python telegram_bot.py` in a separate terminal.
+    3. **Send Text or Voice**: Message your bot on Telegram (e.g. *"500 lunch"* or *"1500 petrol"*), and it will automatically parse and save it into your `expenses.csv`.
     """)
 
 # TAB 5: PDF Reports
