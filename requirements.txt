@@ -1,5 +1,3 @@
+plotly
 streamlit
 pandas
-requests
-fpdf
-langchain
